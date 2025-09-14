@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cogops.org/schema/cogops-1.0.json",
+  "title": "CogOps Data Schema v1.0 (Core)",
+  "description": "Initial core for governing synthetic cognition: assets, transactions, controls, capital impacts.",
+  "type": "object",
+  "license": "CC BY-NC 4.0",
+  "licenseNotice": "\u00a9 2025 CogOps Group LLC. All Rights Reserved. Licensed under Creative Commons Attribution\u2013NonCommercial 4.0 International (CC BY\u2011NC 4.0). Non\u2011commercial use with attribution permitted. Commercial use requires written permission from CogOps Group LLC. License: https://creativecommons.org/licenses/by-nc/4.0/",
+  "properties": {
+    "specVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "producer": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "prod",
+            "preprod",
+            "test",
+            "dev",
+            "lab"
+          ]
+        },
+        "licenseNotice": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "producer",
+        "createdAt"
+      ]
+    },
+    "entities": {
+      "type": "object",
+      "properties": {
+        "cognitiveAssets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CognitiveAsset"
+          }
+        },
+        "cognitiveTransactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CognitiveTransaction"
+          }
+        },
+        "governanceControls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GovernanceControl"
+          }
+        },
+        "capitalImpacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CapitalImpact"
+          }
+        }
+      },
+      "required": [
+        "cognitiveAssets",
+        "cognitiveTransactions",
+        "governanceControls",
+        "capitalImpacts"
+      ]
+    },
+    "relationships": {
+      "type": "object",
+      "properties": {
+        "assetToTransactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AssetToTransaction"
+          }
+        },
+        "transactionToImpacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TransactionToImpact"
+          }
+        },
+        "controlsApplied": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ControlApplication"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "specVersion",
+    "metadata",
+    "entities"
+  ],
+  "$defs": {
+    "CognitiveAsset": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "assetType": {
+          "type": "string",
+          "enum": [
+            "Agent",
+            "Model",
+            "Workflow",
+            "Dataset",
+            "Tool",
+            "Service"
+          ]
+        },
+        "lifecycle": {
+          "type": "string",
+          "enum": [
+            "Ideation",
+            "Development",
+            "Piloting",
+            "Production",
+            "Retired"
+          ]
+        },
+        "owner": {
+          "type": "string"
+        },
+        "vendorOrOwner": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "assetId",
+        "name",
+        "assetType",
+        "lifecycle"
+      ]
+    },
+    "CognitiveTransaction": {
+      "type": "object",
+      "properties": {
+        "txId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "parentAssetId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inputSource": {
+          "type": "string",
+          "enum": [
+            "HumanPrompt",
+            "SystemEvent",
+            "API",
+            "Batch"
+          ]
+        },
+        "outputType": {
+          "type": "string",
+          "enum": [
+            "Recommendation",
+            "Classification",
+            "Generation",
+            "Action",
+            "Retrieval",
+            "Alert"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "latencyMs": {
+          "type": "number"
+        },
+        "costUSD": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "txId",
+        "parentAssetId",
+        "timestamp",
+        "outputType"
+      ]
+    },
+    "GovernanceControl": {
+      "type": "object",
+      "properties": {
+        "controlId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "controlType": {
+          "type": "string",
+          "enum": [
+            "Guardrail",
+            "Policy",
+            "Monitoring",
+            "Approval",
+            "Data",
+            "Security",
+            "Quality"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Active",
+            "Planned",
+            "Retired"
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "controlId",
+        "name",
+        "controlType",
+        "status"
+      ]
+    },
+    "CapitalImpact": {
+      "type": "object",
+      "properties": {
+        "impactId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "relatedTxId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "recognizedValueUSD": {
+          "type": "number"
+        },
+        "avoidedCostUSD": {
+          "type": "number"
+        },
+        "revenueUSD": {
+          "type": "number"
+        },
+        "costUSD": {
+          "type": "number"
+        },
+        "riskUSD": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "impactId",
+        "relatedTxId"
+      ]
+    },
+    "AssetToTransaction": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string"
+        },
+        "txId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "assetId",
+        "txId"
+      ]
+    },
+    "TransactionToImpact": {
+      "type": "object",
+      "properties": {
+        "txId": {
+          "type": "string"
+        },
+        "impactId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "txId",
+        "impactId"
+      ]
+    },
+    "ControlApplication": {
+      "type": "object",
+      "properties": {
+        "controlId": {
+          "type": "string"
+        },
+        "appliesTo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "controlId",
+        "appliesTo"
+      ]
+    }
+  }
+}

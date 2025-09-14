@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cogops.org/schema/cogops-commerce-0.1.json",
+  "title": "CogOps Commercialization Extension v0.1",
+  "type": "object",
+  "properties": {
+    "specVersion": {
+      "type": "string",
+      "const": "0.1"
+    }
+  }
+}

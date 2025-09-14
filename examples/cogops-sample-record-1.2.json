@@ -1,0 +1,55 @@
+{
+  "specVersion": "1.2",
+  "metadata": {
+    "producer": "CogOps Group LLC",
+    "createdAt": "2025-09-14T13:14:23Z",
+    "environment": "dev",
+    "sourceSystem": "lab",
+    "schemaModules": [
+      "core",
+      "commerce"
+    ],
+    "licenseNotice": "\u00a9 2025 CogOps Group LLC. All Rights Reserved. Licensed under Creative Commons Attribution\u2013NonCommercial 4.0 International (CC BY\u2011NC 4.0). Non\u2011commercial use with attribution permitted. Commercial use requires written permission from CogOps Group LLC. License: https://creativecommons.org/licenses/by-nc/4.0/"
+  },
+  "entities": {
+    "cognitiveAssets": [],
+    "cognitiveTransactions": [],
+    "governanceControls": [],
+    "capitalImpacts": []
+  },
+  "relationships": {},
+  "views": {},
+  "controlPlane": {},
+  "architecture": {},
+  "scorecards": [
+    {
+      "scorecardId": "SC-BOARD-1",
+      "name": "Board Capital Scorecard",
+      "persona": "Board",
+      "kpiRefs": [
+        "KPI-RAROCog",
+        "KPI-ValuePerOCU",
+        "KPI-RiskPerOCU"
+      ],
+      "trafficLights": {
+        "RAROCog": ">=0.2",
+        "RiskPerOCU": "<=25",
+        "ValuePerOCU": ">=150"
+      }
+    }
+  ],
+  "playbooks": [
+    {
+      "playbookId": "PB-LATENCY-EXCEED",
+      "name": "Latency Exceeds P95",
+      "trigger": "latencyP95Ms > thresholds.latencyP95Ms",
+      "steps": [
+        "Page SRE on-call",
+        "Reroute to lower-load region",
+        "Switch model to low-latency tier",
+        "Notify CFO if carbonCap risk"
+      ],
+      "owner": "CAIO"
+    }
+  ]
+}

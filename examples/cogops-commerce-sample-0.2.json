@@ -1,0 +1,46 @@
+{
+  "specVersion": "0.2",
+  "metadata": {
+    "producer": "CogOps Group LLC",
+    "createdAt": "2025-09-14T13:14:23Z",
+    "licenseNotice": "\u00a9 2025 CogOps Group LLC. All Rights Reserved. Licensed under Creative Commons Attribution\u2013NonCommercial 4.0 International (CC BY\u2011NC 4.0). Non\u2011commercial use with attribution permitted. Commercial use requires written permission from CogOps Group LLC. License: https://creativecommons.org/licenses/by-nc/4.0/"
+  },
+  "accounts": [
+    {
+      "accountId": "ACME-001",
+      "name": "Acme Health"
+    }
+  ],
+  "products": [
+    {
+      "productId": "P-GOV-CLOUD",
+      "name": "CogOps Governance Cloud",
+      "skus": [
+        {
+          "skuId": "SKU-OCU",
+          "name": "OCU Meter",
+          "meter": "OCU"
+        }
+      ]
+    }
+  ],
+  "licenses": [
+    {
+      "licenseId": "LIC-001",
+      "accountId": "ACME-001",
+      "skuId": "SKU-OCU",
+      "type": "subscription",
+      "status": "active"
+    }
+  ],
+  "usageEvents": [
+    {
+      "eventId": "U-1",
+      "accountId": "ACME-001",
+      "licenseId": "LIC-001",
+      "timestamp": "2025-09-14T13:14:23Z",
+      "meter": "OCU",
+      "amount": 348.7
+    }
+  ]
+}

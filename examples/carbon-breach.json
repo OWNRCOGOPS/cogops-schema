@@ -1,0 +1,21 @@
+{
+  "portfolioId": "PORT-GLOBAL",
+  "name": "Global AI Portfolio",
+  "thresholds": {
+    "carbonCapCO2e": 120000
+  },
+  "kpis": [
+    {
+      "kpiId": "KPI-CarbonPerOCU",
+      "name": "Carbon per OCU",
+      "unit": "gCO2e/OCU",
+      "dimension": "Carbon",
+      "target": 250,
+      "direction": "LowerIsBetter"
+    }
+  ],
+  "breach": {
+    "CarbonPerOCU_Current": 310,
+    "note": "Exceeded target \u2014 shift to greener region/model."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "scorecardId": "SC-BOARD-1",
+  "name": "Board Capital Scorecard",
+  "persona": "Board",
+  "kpiRefs": [
+    "KPI-RAROCog",
+    "KPI-ValuePerOCU",
+    "KPI-RiskPerOCU"
+  ],
+  "trafficLights": {
+    "RAROCog": ">=0.2",
+    "RiskPerOCU": "<=25",
+    "ValuePerOCU": ">=150"
+  }
+}

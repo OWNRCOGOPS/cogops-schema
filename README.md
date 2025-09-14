@@ -1,2 +1,8 @@
-# cogops-schema
-CogOps Schema v1.x – Open governance framework for AI cognition assets, transactions, KPIs, and portfolios; licensed under CC BY-NC 4.0.
+# CogOps Schema — Comprehensive Release
+
+Pillars:
+1) Treat synthetic cognition as a **capital asset**
+2) **Optimize portfolios** across economics, compliance, latency, and carbon
+3) **Guide decisions** with dashboards, scorecards, and playbooks
+
+**License:** CC BY‑NC 4.0. © 2025 CogOps Group LLC. All Rights Reserved. Licensed under Creative Commons Attribution–NonCommercial 4.0 International (CC BY‑NC 4.0). Non‑commercial use with attribution permitted. Commercial use requires written permission from CogOps Group LLC. License: https://creativecommons.org/licenses/by-nc/4.0/

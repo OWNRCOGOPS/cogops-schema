@@ -1,0 +1,25 @@
+{
+  "invoiceId": "INV-2025-11",
+  "accountId": "ACME-001",
+  "periodStart": "2025-11-01T00:00:00Z",
+  "periodEnd": "2025-11-30T23:59:59Z",
+  "lineItems": [
+    {
+      "skuId": "SKU-GOV-PRO",
+      "quantity": 1,
+      "unitPrice": 10000,
+      "amountUSD": 10000,
+      "meter": "Seat"
+    },
+    {
+      "skuId": "SKU-OCU",
+      "quantity": 348.7,
+      "unitPrice": 12,
+      "amountUSD": 4184.4,
+      "meter": "OCU",
+      "usageAmount": 348.7
+    }
+  ],
+  "totalUSD": 14184.4,
+  "externalRef": "stripe_inv_001"
+}

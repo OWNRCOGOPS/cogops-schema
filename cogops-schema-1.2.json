@@ -1,0 +1,1234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cogops.org/schema/cogops-1.2.json",
+  "title": "CogOps Data Schema v1.2 (Enriched Core)",
+  "description": "Governing synthetic cognition across three pillars: capital asset treatment, portfolio optimization, and decision guidance.",
+  "type": "object",
+  "license": "CC BY-NC 4.0",
+  "licenseNotice": "\u00a9 2025 CogOps Group LLC. All Rights Reserved. Licensed under Creative Commons Attribution\u2013NonCommercial 4.0 International (CC BY\u2011NC 4.0). Non\u2011commercial use with attribution permitted. Commercial use requires written permission from CogOps Group LLC. License: https://creativecommons.org/licenses/by-nc/4.0/",
+  "properties": {
+    "specVersion": {
+      "type": "string",
+      "const": "1.2"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "producer": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "prod",
+            "preprod",
+            "test",
+            "dev",
+            "lab"
+          ]
+        },
+        "sourceSystem": {
+          "type": "string"
+        },
+        "schemaModules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "licenseNotice": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "producer",
+        "createdAt"
+      ]
+    },
+    "entities": {
+      "type": "object",
+      "properties": {
+        "cognitiveAssets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CognitiveAsset"
+          }
+        },
+        "cognitiveTransactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CognitiveTransaction"
+          }
+        },
+        "governanceControls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GovernanceControl"
+          }
+        },
+        "capitalImpacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CapitalImpact"
+          }
+        },
+        "riskRegister": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RiskItem"
+          }
+        },
+        "policies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Policy"
+          }
+        },
+        "kpis": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/KPI"
+          }
+        },
+        "portfolios": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Portfolio"
+          }
+        },
+        "stakeholders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Stakeholder"
+          }
+        },
+        "serviceLevels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ServiceLevel"
+          }
+        },
+        "auditEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AuditEvent"
+          }
+        },
+        "dataLineages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DataLineage"
+          }
+        },
+        "modelCards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ModelCard"
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Capability"
+          }
+        },
+        "controlsCatalog": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ControlCatalogItem"
+          }
+        },
+        "scorecards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Scorecard"
+          }
+        },
+        "playbooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Playbook"
+          }
+        }
+      },
+      "required": [
+        "cognitiveAssets",
+        "cognitiveTransactions",
+        "governanceControls",
+        "capitalImpacts"
+      ]
+    },
+    "relationships": {
+      "type": "object",
+      "properties": {
+        "assetToTransactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AssetToTransaction"
+          }
+        },
+        "transactionToImpacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TransactionToImpact"
+          }
+        },
+        "controlsApplied": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ControlApplication"
+          }
+        },
+        "portfolioAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PortfolioAssignment"
+          }
+        },
+        "policyMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PolicyMapping"
+          }
+        },
+        "complianceMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ComplianceMapping"
+          }
+        }
+      }
+    },
+    "views": {
+      "type": "object",
+      "properties": {
+        "roleTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RoleView"
+          }
+        },
+        "dashboards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Dashboard"
+          }
+        }
+      }
+    },
+    "controlPlane": {
+      "type": "object",
+      "properties": {
+        "bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ControlBinding"
+          }
+        },
+        "connectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Connector"
+          }
+        }
+      }
+    },
+    "architecture": {
+      "type": "object",
+      "properties": {
+        "capabilityMap": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Capability"
+          }
+        },
+        "systems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/System"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "specVersion",
+    "metadata",
+    "entities"
+  ],
+  "$defs": {
+    "CognitiveAsset": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "assetType": {
+          "type": "string",
+          "enum": [
+            "Agent",
+            "Model",
+            "Workflow",
+            "Dataset",
+            "Tool",
+            "Service"
+          ]
+        },
+        "lifecycle": {
+          "type": "string",
+          "enum": [
+            "Ideation",
+            "Development",
+            "Piloting",
+            "Production",
+            "Retired"
+          ]
+        },
+        "owner": {
+          "type": "string"
+        },
+        "vendorOrOwner": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "businessCase": {
+          "type": "string"
+        },
+        "portfolioId": {
+          "type": "string"
+        },
+        "criticality": {
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High",
+            "MissionCritical"
+          ]
+        },
+        "dataSensitivity": {
+          "type": "string",
+          "enum": [
+            "Public",
+            "Internal",
+            "Confidential",
+            "Restricted",
+            "Secret"
+          ]
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Interface"
+          }
+        },
+        "costCenter": {
+          "type": "string"
+        },
+        "fundingSource": {
+          "type": "string"
+        },
+        "expectedValueUSD": {
+          "type": "number"
+        },
+        "expectedRiskUSD": {
+          "type": "number"
+        },
+        "rarocTarget": {
+          "type": "number"
+        },
+        "kpiRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "modelCardRef": {
+          "type": "string"
+        },
+        "dataLineageRef": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "assetId",
+        "name",
+        "assetType",
+        "lifecycle"
+      ]
+    },
+    "Interface": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "auth": {
+          "type": "string"
+        }
+      }
+    },
+    "CognitiveTransaction": {
+      "type": "object",
+      "properties": {
+        "txId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "parentAssetId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inputSource": {
+          "type": "string",
+          "enum": [
+            "HumanPrompt",
+            "SystemEvent",
+            "API",
+            "Batch"
+          ]
+        },
+        "inputSummary": {
+          "type": "string"
+        },
+        "outputType": {
+          "type": "string",
+          "enum": [
+            "Recommendation",
+            "Classification",
+            "Generation",
+            "Action",
+            "Retrieval",
+            "Alert"
+          ]
+        },
+        "outputSummary": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "latencyMs": {
+          "type": "number"
+        },
+        "costUSD": {
+          "type": "number"
+        },
+        "ocu": {
+          "type": "number",
+          "description": "Operational Cognitive Units consumed"
+        },
+        "policyRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "controlRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "riskScore": {
+          "type": "number"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "traceId": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auditTrail": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AuditEvent"
+          }
+        },
+        "geo": {
+          "type": "string"
+        },
+        "energyKWh": {
+          "type": "number"
+        },
+        "carbonGramsCO2e": {
+          "type": "number"
+        },
+        "region": {
+          "type": "string"
+        },
+        "hardware": {
+          "type": "string",
+          "description": "GPU/CPU class"
+        },
+        "slaClass": {
+          "type": "string",
+          "enum": [
+            "Gold",
+            "Silver",
+            "Bronze"
+          ]
+        }
+      },
+      "required": [
+        "txId",
+        "parentAssetId",
+        "timestamp",
+        "outputType"
+      ]
+    },
+    "GovernanceControl": {
+      "type": "object",
+      "properties": {
+        "controlId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "controlType": {
+          "type": "string",
+          "enum": [
+            "Guardrail",
+            "Policy",
+            "Monitoring",
+            "Approval",
+            "Data",
+            "Security",
+            "Quality"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Active",
+            "Planned",
+            "Retired"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "mappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ComplianceMapping"
+          }
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/KPI"
+          }
+        }
+      },
+      "required": [
+        "controlId",
+        "name",
+        "controlType",
+        "status"
+      ]
+    },
+    "CapitalImpact": {
+      "type": "object",
+      "properties": {
+        "impactId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "relatedTxId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "recognizedValueUSD": {
+          "type": "number"
+        },
+        "avoidedCostUSD": {
+          "type": "number"
+        },
+        "revenueUSD": {
+          "type": "number"
+        },
+        "costUSD": {
+          "type": "number"
+        },
+        "riskUSD": {
+          "type": "number"
+        },
+        "riskAdjustedValueUSD": {
+          "type": "number"
+        },
+        "raroc": {
+          "type": "number"
+        },
+        "capexUSD": {
+          "type": "number"
+        },
+        "opexUSD": {
+          "type": "number"
+        },
+        "usefulLifeMonths": {
+          "type": "integer"
+        },
+        "amortizationPolicy": {
+          "type": "string",
+          "enum": [
+            "straightLine",
+            "declining",
+            "unitsOfProduction"
+          ]
+        },
+        "impairmentUSD": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "impactId",
+        "relatedTxId"
+      ]
+    },
+    "RiskItem": {
+      "type": "object",
+      "properties": {
+        "riskId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ]
+        },
+        "likelihood": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "mitigations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "owner": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Open",
+            "Mitigating",
+            "Closed"
+          ]
+        }
+      },
+      "required": [
+        "riskId",
+        "name",
+        "severity"
+      ]
+    },
+    "Policy": {
+      "type": "object",
+      "properties": {
+        "policyId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "Ethics",
+            "Security",
+            "Data",
+            "Usage",
+            "Compliance"
+          ]
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "reviewCycleDays": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "policyId",
+        "name"
+      ]
+    },
+    "KPI": {
+      "type": "object",
+      "properties": {
+        "kpiId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "target": {
+          "type": "number"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "HigherIsBetter",
+            "LowerIsBetter"
+          ]
+        },
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "Economics",
+            "Compliance",
+            "Latency",
+            "Carbon"
+          ]
+        }
+      },
+      "required": [
+        "kpiId",
+        "name"
+      ]
+    },
+    "Portfolio": {
+      "type": "object",
+      "properties": {
+        "portfolioId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "strategy": {
+          "type": "string"
+        },
+        "budgetUSD": {
+          "type": "number"
+        },
+        "thresholds": {
+          "type": "object",
+          "properties": {
+            "rarocMin": {
+              "type": "number"
+            },
+            "riskCapUSD": {
+              "type": "number"
+            },
+            "ocuCap": {
+              "type": "number"
+            },
+            "latencyP95Ms": {
+              "type": "number"
+            },
+            "carbonCapCO2e": {
+              "type": "number"
+            },
+            "complianceTarget": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "portfolioId",
+        "name"
+      ]
+    },
+    "Stakeholder": {
+      "type": "object",
+      "properties": {
+        "stakeholderId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "persona": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "stakeholderId",
+        "name",
+        "role"
+      ]
+    },
+    "ServiceLevel": {
+      "type": "object",
+      "properties": {
+        "slId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "kpiRef": {
+          "type": "string"
+        },
+        "appliesTo": {
+          "type": "string",
+          "enum": [
+            "Portfolio",
+            "Asset",
+            "Transaction"
+          ]
+        }
+      },
+      "required": [
+        "slId",
+        "name"
+      ]
+    },
+    "AuditEvent": {
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "actor": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        },
+        "txId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "eventId",
+        "timestamp",
+        "action"
+      ]
+    },
+    "DataLineage": {
+      "type": "object",
+      "properties": {
+        "lineageId": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sinks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "lineageId"
+      ]
+    },
+    "ModelCard": {
+      "type": "object",
+      "properties": {
+        "modelCardId": {
+          "type": "string"
+        },
+        "modelType": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "trainingDataSummary": {
+          "type": "string"
+        },
+        "evalMetrics": {
+          "type": "object"
+        },
+        "limitations": {
+          "type": "string"
+        },
+        "intendedUse": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "modelCardId",
+        "modelType"
+      ]
+    },
+    "Capability": {
+      "type": "object",
+      "properties": {
+        "capabilityId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "maturity": {
+          "type": "string",
+          "enum": [
+            "Initial",
+            "Managed",
+            "Defined",
+            "QuantitativelyManaged",
+            "Optimizing"
+          ]
+        }
+      },
+      "required": [
+        "capabilityId",
+        "name"
+      ]
+    },
+    "ControlCatalogItem": {
+      "type": "object",
+      "properties": {
+        "catalogId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "framework": {
+          "type": "string"
+        },
+        "controlRef": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "catalogId",
+        "name"
+      ]
+    },
+    "Scorecard": {
+      "type": "object",
+      "properties": {
+        "scorecardId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "persona": {
+          "type": "string"
+        },
+        "kpiRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trafficLights": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "scorecardId",
+        "name"
+      ]
+    },
+    "Playbook": {
+      "type": "object",
+      "properties": {
+        "playbookId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "trigger": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "owner": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "playbookId",
+        "name",
+        "trigger"
+      ]
+    },
+    "AssetToTransaction": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string"
+        },
+        "txId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "assetId",
+        "txId"
+      ]
+    },
+    "TransactionToImpact": {
+      "type": "object",
+      "properties": {
+        "txId": {
+          "type": "string"
+        },
+        "impactId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "txId",
+        "impactId"
+      ]
+    },
+    "ControlApplication": {
+      "type": "object",
+      "properties": {
+        "controlId": {
+          "type": "string"
+        },
+        "appliesTo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "controlId",
+        "appliesTo"
+      ]
+    },
+    "PortfolioAssignment": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string"
+        },
+        "portfolioId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "assetId",
+        "portfolioId"
+      ]
+    },
+    "PolicyMapping": {
+      "type": "object",
+      "properties": {
+        "policyId": {
+          "type": "string"
+        },
+        "appliesTo": {
+          "type": "string"
+        }
+      }
+    },
+    "ComplianceMapping": {
+      "type": "object",
+      "properties": {
+        "framework": {
+          "type": "string"
+        },
+        "controlRef": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "RoleView": {
+      "type": "object",
+      "properties": {
+        "persona": {
+          "type": "string"
+        },
+        "kpis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Dashboard": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ControlBinding": {
+      "type": "object",
+      "properties": {
+        "bindingId": {
+          "type": "string"
+        },
+        "system": {
+          "type": "string"
+        },
+        "binding": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "Connector": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object"
+        }
+      }
+    },
+    "System": {
+      "type": "object",
+      "properties": {
+        "systemId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

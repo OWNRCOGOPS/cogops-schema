@@ -1,0 +1,469 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cogops.org/schema/cogops-commerce-0.2.json",
+  "title": "CogOps Commercialization Extension v0.2 (Enriched)",
+  "description": "Accounts, products/SKUs, price books, offers, licenses, activations, usage metering, invoices, renewals, payments.",
+  "type": "object",
+  "license": "CC BY-NC 4.0",
+  "licenseNotice": "\u00a9 2025 CogOps Group LLC. All Rights Reserved. Licensed under Creative Commons Attribution\u2013NonCommercial 4.0 International (CC BY\u2011NC 4.0). Non\u2011commercial use with attribution permitted. Commercial use requires written permission from CogOps Group LLC. License: https://creativecommons.org/licenses/by-nc/4.0/",
+  "properties": {
+    "specVersion": {
+      "type": "string",
+      "const": "0.2"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "producer": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "licenseNotice": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "producer",
+        "createdAt"
+      ]
+    },
+    "accounts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Account"
+      }
+    },
+    "contacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Contact"
+      }
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Product"
+      }
+    },
+    "priceBooks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PriceBook"
+      }
+    },
+    "offers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Offer"
+      }
+    },
+    "licenses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/License"
+      }
+    },
+    "activations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Activation"
+      }
+    },
+    "usageEvents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/UsageEvent"
+      }
+    },
+    "invoices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Invoice"
+      }
+    },
+    "payments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Payment"
+      }
+    }
+  },
+  "required": [
+    "specVersion",
+    "metadata",
+    "accounts",
+    "products",
+    "licenses"
+  ],
+  "$defs": {
+    "Account": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "segment": {
+          "type": "string"
+        },
+        "billingAddress": {
+          "type": "object"
+        },
+        "taxId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "accountId",
+        "name"
+      ]
+    },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "contactId": {
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SKU"
+          }
+        }
+      },
+      "required": [
+        "productId",
+        "name"
+      ]
+    },
+    "SKU": {
+      "type": "object",
+      "properties": {
+        "skuId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "meter": {
+          "type": "string",
+          "enum": [
+            "OCU",
+            "Seat",
+            "Transaction",
+            "MAU"
+          ]
+        },
+        "entitlements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attributes": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "skuId",
+        "name",
+        "meter"
+      ]
+    },
+    "PriceBook": {
+      "type": "object",
+      "properties": {
+        "priceBookId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PriceEntry"
+          }
+        }
+      },
+      "required": [
+        "priceBookId",
+        "name",
+        "currency"
+      ]
+    },
+    "PriceEntry": {
+      "type": "object",
+      "properties": {
+        "skuId": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        },
+        "unitPrice": {
+          "type": "number"
+        },
+        "minQty": {
+          "type": "number"
+        },
+        "maxQty": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "skuId",
+        "unitPrice"
+      ]
+    },
+    "Offer": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "type": "string"
+        },
+        "skuId": {
+          "type": "string"
+        },
+        "discountPct": {
+          "type": "number"
+        },
+        "start": {
+          "type": "string",
+          "format": "date"
+        },
+        "end": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "License": {
+      "type": "object",
+      "properties": {
+        "licenseId": {
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "skuId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "subscription",
+            "perpetual",
+            "trial"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "suspended",
+            "cancelled",
+            "expired"
+          ]
+        },
+        "seats": {
+          "type": "number"
+        },
+        "termStart": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "termEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "renewalPolicy": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "manual",
+            "none"
+          ]
+        },
+        "priceBookRef": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "licenseId",
+        "accountId",
+        "skuId",
+        "type",
+        "status"
+      ]
+    },
+    "Activation": {
+      "type": "object",
+      "properties": {
+        "activationId": {
+          "type": "string"
+        },
+        "licenseId": {
+          "type": "string"
+        },
+        "activatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "entitlements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "UsageEvent": {
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "licenseId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "meter": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "dimensions": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "eventId",
+        "timestamp",
+        "meter",
+        "amount"
+      ]
+    },
+    "Invoice": {
+      "type": "object",
+      "properties": {
+        "invoiceId": {
+          "type": "string"
+        },
+        "accountId": {
+          "type": "string"
+        },
+        "periodStart": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "periodEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lineItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InvoiceLine"
+          }
+        },
+        "totalUSD": {
+          "type": "number"
+        },
+        "externalRef": {
+          "type": "string"
+        }
+      }
+    },
+    "InvoiceLine": {
+      "type": "object",
+      "properties": {
+        "skuId": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "number"
+        },
+        "unitPrice": {
+          "type": "number"
+        },
+        "amountUSD": {
+          "type": "number"
+        },
+        "meter": {
+          "type": "string"
+        },
+        "usageAmount": {
+          "type": "number"
+        }
+      }
+    },
+    "Payment": {
+      "type": "object",
+      "properties": {
+        "paymentId": {
+          "type": "string"
+        },
+        "invoiceId": {
+          "type": "string"
+        },
+        "amountUSD": {
+          "type": "number"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "method": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

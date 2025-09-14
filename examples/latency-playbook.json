@@ -1,0 +1,12 @@
+{
+  "playbookId": "PB-LATENCY-EXCEED",
+  "name": "Latency Exceeds P95",
+  "trigger": "latencyP95Ms > thresholds.latencyP95Ms",
+  "steps": [
+    "Page SRE on-call",
+    "Reroute to lower-load region",
+    "Switch model to low-latency tier",
+    "Notify CFO if carbonCap risk"
+  ],
+  "owner": "CAIO"
+}

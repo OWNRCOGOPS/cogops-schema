@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © 2025 CogOps Group LLC. All Rights Reserved. Licensed under Creative Commons Attribution–NonCommercial 4.0 International (CC BY‑NC 4.0). Non‑commercial use with attribution permitted. Commercial use requires written permission from CogOps Group LLC. License: https://creativecommons.org/licenses/by-nc/4.0/ -->
+<CogOpsRecord>
+  <SpecVersion>1.2</SpecVersion>
+  <AssetName>Claims Triage Assistant</AssetName>
+  <TransactionTimestamp>2025-09-14T13:14:23Z</TransactionTimestamp>
+  <OutputType>Recommendation</OutputType>
+  <Cost>1.2</Cost>
+  <Value>52.0</Value>
+  <Risk>3.7</Risk>
+</CogOpsRecord>

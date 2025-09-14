@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © 2025 CogOps Group LLC. All Rights Reserved. Licensed under Creative Commons Attribution–NonCommercial 4.0 International (CC BY‑NC 4.0). Non‑commercial use with attribution permitted. Commercial use requires written permission from CogOps Group LLC. License: https://creativecommons.org/licenses/by-nc/4.0/ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="CogOpsRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="SpecVersion" type="xs:string"/>
+        <xs:element name="AssetName" type="xs:string"/>
+        <xs:element name="TransactionTimestamp" type="xs:dateTime"/>
+        <xs:element name="OutputType" type="xs:string"/>
+        <xs:element name="Cost" type="xs:decimal" minOccurs="0"/>
+        <xs:element name="Value" type="xs:decimal" minOccurs="0"/>
+        <xs:element name="Risk" type="xs:decimal" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
